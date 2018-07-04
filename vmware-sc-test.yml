@@ -1,0 +1,62 @@
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: vmware001
+  annotations:
+    volume.beta.kubernetes.io/storage-class: vmware
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 8Gi
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: vmware002
+  annotations:
+    volume.beta.kubernetes.io/storage-class: vmware
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 8Gi
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: ubuntu1
+spec:
+  containers:
+  - name: ubuntu
+    image: ubuntu
+    command: ["sleep"]
+    args: ["infinity"]
+    volumeMounts:
+    - name: test-volume
+      mountPath: /test-vmdk
+  volumes:
+  - name: test-volume
+    persistentVolumeClaim:
+      claimName: vmware001
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: ubuntu2
+spec:
+  containers:
+  - name: ubuntu2
+    image: ubuntu
+    command: ["sleep"]
+    args: ["infinity"]
+    volumeMounts:
+    - name: test-volume
+      mountPath: /test-vmdk
+  volumes:
+  - name: test-volume
+    persistentVolumeClaim:
+      claimName: vmware002
