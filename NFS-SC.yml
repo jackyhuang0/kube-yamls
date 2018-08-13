@@ -1,3 +1,10 @@
+## Prepare the node
+## 1. Taint the node
+## kubectl taint nodes node1 key=value:NoSchedule
+## 2. Create local directory
+## 3. Use nodeSelector and toleration to deploy NFS pod to the node
+##
+
 apiVersion: v1
 kind: ServiceAccount
 metadata:
