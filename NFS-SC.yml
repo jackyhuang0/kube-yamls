@@ -1,9 +1,10 @@
 ## Prepare the node
+## 0. Install NFS client on all worker nodes(apt-get install nfs-common for Ubuntu)
 ## 1. Taint the node
-## kubectl taint nodes node1 key=value:NoSchedule
+##    kubectl taint nodes node1 key=value:NoSchedule
 ## 2. Create local directory
 ## 3. Use nodeSelector and toleration to deploy NFS pod to the node
-##
+## 
 
 apiVersion: v1
 kind: ServiceAccount
