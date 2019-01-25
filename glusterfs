@@ -1,0 +1,8 @@
+###Clean glusterfs
+
+rm -rf /var/lib/heketi /var/lib/glusterd /var/log/glusterfs
+lvscan | grep 'vg_' | awk '{print $2}' | xargs -n 1 lvremove -y
+vgscan | grep 'vg_' | awk '{print $4}' | xargs -n 1 vgremove
+pvremove /dev/sdc
+wipefs --all --force /dev/sdc
+
