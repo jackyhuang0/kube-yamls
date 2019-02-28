@@ -1,9 +1,10 @@
 subscription-manager register --username=xxx --password=xxx
+(or: subscription-manager register --org=xxx --activationkey=xxx)
+
 subscription-manager refresh
 subscription-manager list --available --matches '*OpenShift*'
-subscription-manager refresh subscription-manager attach --pool=xxx
-
 subscription-manager attach --pool=xxx
+
 subscription-manager repos --disable="*"
 yum repolist
 subscription-manager repos --enable="rhel-7-server-rpms" --enable="rhel-7-server-extras-rpms" --enable="rhel-7-server-ose-3.10-rpms" --enable="rhel-7-server-ansible-2.4-rpms"
