@@ -1,0 +1,21 @@
+subscription-manager register --username=xxx --password=xxx
+subscription-manager refresh
+subscription-manager list --available --matches '*OpenShift*'
+subscription-manager refresh subscription-manager attach --pool=xxx
+
+subscription-manager attach --pool=xxx
+subscription-manager repos --disable="*"
+yum repolist
+subscription-manager repos --enable="rhel-7-server-rpms" --enable="rhel-7-server-extras-rpms" --enable="rhel-7-server-ose-3.10-rpms" --enable="rhel-7-server-ansible-2.4-rpms"
+yum install wget git net-tools bind-utils yum-utils iptables-services bridge-utils bash-completion kexec-tools sos psacct git
+yum install openshift-ansible
+yum install docker-1.13.1
+systemctl enable docker
+systemctl start docker
+vi /etc/sysconfig/docker
+vi /usr/share/ansible/openshift-ansible/roles/openshift_facts/defaults/main.yml
+
+
+ansible-playbook /usr/share/ansible/openshift-ansible/playbooks/prerequisites.yml
+ansible-playbook /usr/share/ansible/openshift-ansible/playbooks/deploy_cluster.yml
+ansible-playbook /usr/share/ansible/openshift-ansible/playbooks/adhoc/uninstall.yml  
