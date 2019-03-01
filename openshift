@@ -37,6 +37,8 @@ icpops1.cps.cloud openshift_node_group_name='node-config-all-in-one'
 ansible_ssh_user=root
 ansible_become=no
 openshift_deployment_type=openshift-enterprise
+oreg_auth_user=
+oreg_auth_password=
 ----------------
 
 ansible-playbook /usr/share/ansible/openshift-ansible/playbooks/prerequisites.yml
