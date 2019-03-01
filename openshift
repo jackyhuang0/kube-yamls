@@ -14,8 +14,30 @@ yum install docker-1.13.1
 systemctl enable docker
 systemctl start docker
 vi /etc/sysconfig/docker
-vi /usr/share/ansible/openshift-ansible/roles/openshift_facts/defaults/main.yml
 
+
+vi /usr/share/ansible/openshift-ansible/roles/openshift_facts/defaults/main.yml
+vi /etc/ansible/hosts
+--------------
+[OSEv3:children]
+masters
+nodes
+etcd
+
+[masters]
+icpops1.cps.cloud
+
+[etcd]
+icpops1.cps.cloud
+
+[nodes]
+icpops1.cps.cloud openshift_node_group_name='node-config-all-in-one'
+
+[OSEv3:vars]
+ansible_ssh_user=root
+ansible_become=no
+openshift_deployment_type=openshift-enterprise
+----------------
 
 ansible-playbook /usr/share/ansible/openshift-ansible/playbooks/prerequisites.yml
 ansible-playbook /usr/share/ansible/openshift-ansible/playbooks/deploy_cluster.yml
