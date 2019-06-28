@@ -1,0 +1,29 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: think
+  labels:
+    app: think
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: think
+  template:
+    metadata:
+      labels:
+        app: think
+    spec:
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: app
+                operator: In
+                values:
+                - think
+            topologyKey: kubernetes.io/hostname
+      containers:
+      - name: think
+        image: icpprod.icp:8500/ibmcom/pause:3.1
