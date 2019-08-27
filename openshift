@@ -1,3 +1,7 @@
+## https://access.redhat.com/RegistryAuthentication
+## https://access.redhat.com/terms-based-registry/
+## 3.11 requires registry username/password
+
 subscription-manager register --username=xxx --password=xxx
 (or: subscription-manager register --org=xxx --activationkey=xxx)
 
